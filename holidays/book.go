@@ -61,3 +61,11 @@ func isWeekend(d time.Time) bool {
 func _key(d time.Time) string {
 	return d.Format("2006-01-02")
 }
+func (b *book) Holiday(d time.Time) (bool, string, []string) {
+	e := b.findEvent(d)
+
+	if e == nil || e.Type == "workingday" {
+		return false, "", []string{""}
+	}
+	return true, e.Name, e.Range
+}
