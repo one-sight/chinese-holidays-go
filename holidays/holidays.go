@@ -62,3 +62,12 @@ func checkInitBook() error {
 	}
 	return nil
 }
+
+func Holiday(d time.Time) (bool, string, []string) {
+	err := checkInitBook()
+	if err != nil {
+		return false, "", []string{""}
+	}
+	return b.Holiday(d)
+}
+
