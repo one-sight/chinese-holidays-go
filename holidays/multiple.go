@@ -35,3 +35,15 @@ func (m multipleQueryer) IsWorkingday(date time.Time) (b bool, err error) {
 
 	return false, err
 }
+
+
+func (m multipleQueryer) Holiday(d time.Time) (bool, string, []string) {
+	for _, q := range m.queryers {
+		b, err = q.IsHoliday(date)
+		if err == nil {
+			return b, "",[]string{}
+		}
+	}
+	return false, "", []string{}
+
+}
