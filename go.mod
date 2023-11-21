@@ -1,3 +1,3 @@
-module github.com/bastengao/chinese-holidays-go
+module github.com/one-sight/chinese-holidays-go
 
 go 1.16
