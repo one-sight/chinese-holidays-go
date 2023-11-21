@@ -55,6 +55,19 @@ func (c *cache) IsHoliday(date time.Time) (bool, error) {
 	return b, err
 }
 
+func (c *cache) Holiday(d time.Time) (bool, string, []string) {
+	c.l.RLock()
+	
+	e := c.b.findEvent(d)
+
+	if e == nil || e.Type == "workingday" {
+		c.l.RUnlock()
+		return false, "", []string{""}
+	}
+	c.l.RUnlock()
+	return true, e.Name, e.Range
+}
+
 func (c *cache) IsWorkingday(date time.Time) (bool, error) {
 	c.l.RLock()
 	b, err := c.b.IsWorkingday(date)
